@@ -5,20 +5,13 @@ public class BFCalculator {
     return new BigFraction();
   }
 
-  public void add(BigFraction val){
-    
-  }
-public void subtract(BigFraction val) {
+  public void add(BigFraction val) {}
 
-}
-public void multiply(BigFraction val){
+  public void subtract(BigFraction val) {}
 
-}
-public void divide(BigFraction val) {
+  public void multiply(BigFraction val) {}
 
-}
+  public void divide(BigFraction val) {}
 
-public void clear() {
-  
-}
+  public void clear() {}
 }

@@ -1,5 +1,5 @@
 package edu.grinnell.csc207.util;
 
-public class BFRegister {
+public class Fraction {
   
 }
