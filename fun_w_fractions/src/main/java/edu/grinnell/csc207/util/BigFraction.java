@@ -12,23 +12,33 @@ public class BigFraction {
   public BigFraction(BigInteger num, BigInteger denom) {
     this.num = num;
     this.denom = denom;
+    this.reduce();
   }
 
   public BigFraction(int num, int denom) {
     this.num = BigInteger.valueOf(num);
     this.denom = BigInteger.valueOf(denom);
+    this.reduce();
   }
 
   public BigFraction(BigInteger wholeNumb) {
     this.num = wholeNumb;
     this.denom = BigInteger.ONE;
   }
-  
+
   public BigFraction(String str) {
     String[] terms = str.split("/");
-
-    this.num = BigInteger.valueOf(Integer.parseInt(terms[0]));
-    this.denom = BigInteger.valueOf(Integer.parseInt(terms[1]));
+    if (terms.length == 1) {
+      this.num = BigInteger.valueOf(Integer.parseInt(terms[0]));
+      this.denom = BigInteger.valueOf(1);
+    } else if (terms.length == 2) {
+      this.num = BigInteger.valueOf(Integer.parseInt(terms[0]));
+      this.denom = BigInteger.valueOf(Integer.parseInt(terms[1]));
+      this.reduce();
+    } else {
+      this.num = BigInteger.valueOf(0);
+      this.denom = BigInteger.valueOf(1);
+    }
   }
 
   // Methods
@@ -56,7 +66,8 @@ public class BigFraction {
   }
 
   public String toString() {
-    if (this.denom == BigInteger.valueOf(1)) {
+    this.reduce();
+    if (this.denom.equals(BigInteger.valueOf(1))) {
       return this.num.toString();
     }
     return this.num.toString() + "/" + this.denom.toString();
@@ -76,7 +87,6 @@ public class BigFraction {
     val.denom = newDenom;
   }
 
-  // New Shit
   public BigFraction add(BigFraction val) {
     BigFraction newFrac = new BigFraction(this.num, this.denom);
     BigFraction passedFrac = new BigFraction(val.num, val.denom);

@@ -23,36 +23,53 @@ public class InteractiveCalculator {
     return count;
   }
 
-  private static boolean isValidOperand(String operand) {
+  private static boolean isValidOperand(BFRegisterSet register, String operand) {
     if (countChar(operand, '/') <= 1) {
       String[] terms = operand.split("/");
-      if (terms.length <= 2) {
-        // checks that each string is valid integer
-        for (String termAsString : terms) {
-          try {
-            Integer.parseInt(termAsString);
-          } catch (Exception e) {
-            return false;
-          }
+      // checks that each string is valid integer
+      for (String termAsString : terms) {
+        try {
+          Integer.parseInt(termAsString);
+        } catch (Exception e) {
+          return false;
         }
-        return true;
       }
+      return true;
+      // checks for stored variable
+    } else if (operand.length() == 1
+        && isLowCaseAlpha(operand.charAt(0))
+        && register.get(operand.charAt(0)) != null) {
+      return true;
     }
     return false;
   }
 
-  private static boolean processExpression(BFCalculator calculator, String str) {
+  private static boolean isLowCaseAlpha(char ch) {
+    return ASCII_A_LOWER <= ch && ch <= ASCII_Z_LOWER;
+  }
+
+  private static boolean processExpression(
+      BFCalculator calculator, BFRegisterSet register, String str) {
 
     String[] arguments = str.split(" ");
 
-    if (arguments.length % 2 == 1 && isValidOperand(arguments[0])) {
+    if (arguments.length % 2 == 1 && isValidOperand(register, arguments[0])) {
+
+      if (arguments[0].length() == 1) {
+        arguments[0] = register.get(arguments[0].charAt(0)).toString();
+      }
 
       calculator.setValue(new BigFraction(arguments[0]));
 
       for (int i = 1; i < arguments.length; i += 2) {
         char operator = arguments[i].charAt(0);
         String operand = arguments[i + 1];
-        if (operators.contains(operator) && isValidOperand(operand)) {
+
+        if (operators.contains(operator) && isValidOperand(register, operand)) {
+          if (operand.length() == 1) {
+            operand = register.get(operand.charAt(0)).toString();
+          }
+
           if (operator == '+') {
             calculator.add(new BigFraction(operand));
           } else if (operator == '-') {
@@ -83,7 +100,7 @@ public class InteractiveCalculator {
   private static boolean processStore(BFCalculator calculator, BFRegisterSet register, String str) {
     String stringVar = str.split(" ")[1];
     char charVar = stringVar.charAt(0);
-    if (stringVar.length() == 1 && charVar >= ASCII_A_LOWER && charVar <= ASCII_Z_LOWER) {
+    if (stringVar.length() == 1 && isLowCaseAlpha(charVar)) {
       register.store(charVar, calculator.get());
       return true;
     }
@@ -103,7 +120,7 @@ public class InteractiveCalculator {
         } else {
           pen.println("*** ERROR [STORE command received invalid register] ***");
         }
-      } else if (processExpression(calculator, inputLine)) {
+      } else if (processExpression(calculator, register, inputLine)) {
         pen.println(calculator.get().toString());
       } else {
         pen.println("*** ERROR [Invalid expression] ***");

@@ -41,7 +41,7 @@ public class BFCalculator {
   }
 
   public void clear() {
-    currentVal.setDenom(BigInteger.valueOf(0));
-    currentVal.setNum(BigInteger.valueOf(1));
+    currentVal.setDenom(BigInteger.valueOf(1));
+    currentVal.setNum(BigInteger.valueOf(0));
   }
 }
