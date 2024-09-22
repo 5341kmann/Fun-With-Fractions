@@ -45,7 +45,7 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>3.3.0</version>
                     <configuration>
-                        <mainClass>edu.grinnell.csc207.main.BFCalculator</mainClass>
+                        <mainClass>edu.grinnell.csc207.main.InteractiveCalculator</mainClass>
                     </configuration>
                 </plugin>
 
@@ -65,7 +65,7 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>edu.grinnell.csc207.main.BFCalculator</mainClass>
+                                <mainClass>edu.grinnell.csc207.main.InteractiveCalculator</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
