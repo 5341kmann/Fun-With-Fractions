@@ -47,6 +47,11 @@ public class BigFraction {
 
     this.denom = this.denom.divide(gcd);
     this.num = this.num.divide(gcd);
+
+    if (this.denom.compareTo(BigInteger.valueOf(0)) == -1) {
+      this.num = this.num.multiply(BigInteger.valueOf(-1));
+      this.denom = this.denom.multiply(BigInteger.valueOf(-1));
+    }
   }
 
   public BigInteger numerator() {

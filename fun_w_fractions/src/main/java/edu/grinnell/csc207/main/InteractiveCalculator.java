@@ -23,19 +23,28 @@ public class InteractiveCalculator {
     return count;
   }
 
+  private static boolean isInteger(String str) {
+    try {
+      Integer.parseInt(str);
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
   private static boolean isValidOperand(BFRegisterSet register, String operand) {
-    if (countChar(operand, '/') <= 1) {
+    if (countChar(operand, '/') == 1) {
       String[] terms = operand.split("/");
       // checks that each string is valid integer
       for (String termAsString : terms) {
-        try {
-          Integer.parseInt(termAsString);
-        } catch (Exception e) {
+        if (!isInteger(termAsString)) {
           return false;
         }
       }
       return true;
       // checks for stored variable
+    } else if (isInteger(operand)) {
+      return true;
     } else if (operand.length() == 1
         && isLowCaseAlpha(operand.charAt(0))
         && register.get(operand.charAt(0)) != null) {
@@ -51,11 +60,11 @@ public class InteractiveCalculator {
   private static boolean processExpression(
       BFCalculator calculator, BFRegisterSet register, String str) {
 
+    PrintWriter pen = new PrintWriter(System.out, true);
     String[] arguments = str.split(" ");
 
     if (arguments.length % 2 == 1 && isValidOperand(register, arguments[0])) {
-
-      if (arguments[0].length() == 1) {
+      if (isLowCaseAlpha(arguments[0].charAt(0))) {
         arguments[0] = register.get(arguments[0].charAt(0)).toString();
       }
 
@@ -66,7 +75,7 @@ public class InteractiveCalculator {
         String operand = arguments[i + 1];
 
         if (operators.contains(operator) && isValidOperand(register, operand)) {
-          if (operand.length() == 1) {
+          if (isLowCaseAlpha(operand.charAt(0))) {
             operand = register.get(operand.charAt(0)).toString();
           }
 
@@ -80,11 +89,14 @@ public class InteractiveCalculator {
             calculator.divide(new BigFraction(operand));
           }
         } else {
+
           return false;
         }
       }
       return true;
     }
+    // pen.printf("fail a: %b%n",arguments.length % 2 == 1);
+    // pen.printf("fail b: %b%n",isValidOperand(register, arguments[0]));
     return false;
   }
 
