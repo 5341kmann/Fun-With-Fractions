@@ -2,19 +2,26 @@ package edu.grinnell.csc207.util;
 
 import java.math.BigInteger;
 
-/** util classes to produces fraction objects composed of BigIntegers. */
+/**
+ * Util classes to produces fraction objects composed of BigIntegers.
+ * @author Grant Sackmann
+ */
 public class BigFraction {
 
-  /** Fraction object numerator. */
+  /**
+   * Fraction object numerator.
+   */
   private BigInteger num;
 
-  /** Fraction object denominator. */
+  /**
+   * Fraction object denominator.
+   */
   private BigInteger denom;
 
   /**
    * Constructor for BigFraction object.
    *
-   * @param numVal numerator
+   * @param numVal   numerator
    * @param denomVal denominator
    */
   public BigFraction(BigInteger numVal, BigInteger denomVal) {
@@ -26,7 +33,7 @@ public class BigFraction {
   /**
    * Constructor for BigFraction object.
    *
-   * @param numVal numerator
+   * @param numVal   numerator
    * @param denomVal denominator
    */
   public BigFraction(int numVal, int denomVal) {
@@ -65,7 +72,9 @@ public class BigFraction {
     } // end if
   } // end BigFraction()
 
-  /** reduces fraction object. */
+  /**
+   * reduces fraction object.
+   */
   public void reduce() {
     BigInteger gcd = this.denom.gcd(this.num);
 

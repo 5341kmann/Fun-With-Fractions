@@ -4,7 +4,10 @@ import edu.grinnell.csc207.util.BFCalculator;
 import edu.grinnell.csc207.util.BFRegisterSet;
 import java.io.PrintWriter;
 
-/** Single line argument calculator program. */
+/**
+ * Single line argument calculator program.
+ * @author Grant Sackmann
+ */
 public class QuickCalculator {
 
   /**
@@ -19,7 +22,7 @@ public class QuickCalculator {
     BFCalculator calculator = new BFCalculator();
 
     for (int i = 0; i < args.length; i++) {
-      String fragment = args[i];
+      String fragment = args[i].toLowerCase();
       pen.print(fragment);
       if (InteractiveCalculator.isStore(fragment)) {
         if (InteractiveCalculator.processStore(calculator, register, fragment)) {

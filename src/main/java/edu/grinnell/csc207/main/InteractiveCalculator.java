@@ -7,22 +7,32 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Set;
 
-/** REPL Calculator program. */
+/**
+ * REPL interactive calculator class.
+ * @author Grant Sackmann
+ */
 public class InteractiveCalculator {
-  /** Set of Valid Mathematical Operators. */
+
+  /**
+   * Set of Valid Mathematical Operators.
+   */
   static final Set<Character> OPERATORS = Set.of('*', '/', '+', '-');
 
-  /** ASCII 'a' Value. */
+  /**
+   * ASCII 'a' Value.
+   */
   static final int ASCII_A_LOWER = 97;
 
-  /** ASCII 'z' Value. */
+  /**
+   * ASCII 'z' Value.
+   */
   static final int ASCII_Z_LOWER = 122;
 
   /**
    * counts occurrences of given char in string.
    *
    * @param str String input
-   * @param ch character to be counted
+   * @param ch  character to be counted
    * @return int number of occurrences
    */
   private static int countChar(String str, char ch) {
@@ -54,7 +64,7 @@ public class InteractiveCalculator {
    * Checks if String is a valid calculator operand with respect to register.
    *
    * @param register variable register
-   * @param operand String representing mathematical operand
+   * @param operand  String representing mathematical operand
    * @return boolean truth value of valid operand
    */
   private static boolean isValidOperand(BFRegisterSet register, String operand) {
@@ -93,12 +103,12 @@ public class InteractiveCalculator {
    * Attempts to process String str using calculator and register objects.
    *
    * @param calculator object for processing values and storing result
-   * @param register object for storing and accessing calculated variables
-   * @param str String representation of expression to be computed
+   * @param register   object for storing and accessing calculated variables
+   * @param str        String representation of expression to be computed
    * @return boolean truth value of whether String expression could be processed
    */
   public static boolean processExpression(
-    BFCalculator calculator, BFRegisterSet register, String str) {
+      BFCalculator calculator, BFRegisterSet register, String str) {
 
     String[] arguments = str.split(" ");
 
@@ -148,19 +158,19 @@ public class InteractiveCalculator {
   public static boolean isStore(String str) {
     String[] arguments = str.split(" ");
 
-    if (arguments.length == 2 && arguments[0].equals("STORE")) {
+    if (arguments.length == 2 && arguments[0].equals("store")) {
       return true;
     } // end if
     return false;
   } // end isStore()
 
   /**
-   * Attempts to process String expression as a STORE command with respect to calculator
-   * and register objects.
+   * Attempts to process String expression as a STORE command with respect to calculator and
+   * register objects.
    *
    * @param calculator object for accessing calculated value to be stored
-   * @param register object for storing variable
-   * @param str String representation of STORE expression
+   * @param register   object for storing variable
+   * @param str        String representation of STORE expression
    * @return boolean truth value of whether STORE command could be processed
    */
   public static boolean processStore(BFCalculator calculator, BFRegisterSet register, String str) {
@@ -184,8 +194,8 @@ public class InteractiveCalculator {
     BFRegisterSet register = new BFRegisterSet();
     String inputLine = "";
     BFCalculator calculator = new BFCalculator();
-    while (!(inputLine).equals("QUIT")) {
-      inputLine = scan.nextLine();
+    inputLine = scan.nextLine().toLowerCase();
+    while (!(inputLine).equals("quit")) {
       if (isStore(inputLine)) {
         if (processStore(calculator, register, inputLine)) {
           pen.println("STORED");
@@ -197,6 +207,7 @@ public class InteractiveCalculator {
       } else {
         pen.println("*** ERROR [Invalid expression] ***");
       } // end if
+      inputLine = scan.nextLine().toLowerCase();
     } // end while
     scan.close();
   } // end main()

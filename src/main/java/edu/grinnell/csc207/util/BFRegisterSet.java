@@ -1,18 +1,29 @@
 package edu.grinnell.csc207.util;
 
-/** util class for storing variables and their BigFraction values. */
+/**
+ * Util class for storing variables and their BigFraction values.
+ * @author Grant Sackmann
+ */
 public class BFRegisterSet {
 
-  /** Register storing values for given variable. */
+  /**
+   * Register storing values for given variable.
+   */
   private BigFraction[] register;
 
-  /** ASCII value of char 'a'. */
+  /**
+   * ASCII value of char 'a'.
+   */
   private static final int BASE = 97;
 
-  /** Alphabet length. */
+  /**
+   * Alphabet length.
+   */
   private static final int ALPHABET_LENGTH = 26;
 
-  /** Constructor making a alphabet length BigInteger register. */
+  /**
+   * Constructor making a alphabet length BigInteger register.
+   */
   public BFRegisterSet() {
     this.register = new BigFraction[ALPHABET_LENGTH];
   } // end BFRegisterSet()

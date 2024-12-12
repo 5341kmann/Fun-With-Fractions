@@ -6,4 +6,7 @@ Implementing a command line fractional arithmetic calculator
 
 ## resources
 ### Stack Overflow
-Error Look up and general debugging guidance
+Error Look up and general debugging guidance with a variable register.
+
+## GitHub
+https://github.com/5341kmann/Fun-With-Fractions.git

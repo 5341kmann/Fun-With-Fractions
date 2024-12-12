@@ -2,13 +2,22 @@ package edu.grinnell.csc207.util;
 
 import java.math.BigInteger;
 
-/** BigFraction type calculator util. */
+/**
+ * BigFraction type calculator util.
+ * @author Grant Sackmann
+ *
+ *
+ */
 public class BFCalculator {
 
-  /** Stores recently computed value. */
+  /**
+   * Stores recently computed value.
+   */
   private BigFraction currentVal;
 
-  /** Constructs BFCalculator with initial value of zero. */
+  /**
+   * Constructs BFCalculator with initial value of zero.
+   */
   public BFCalculator() {
     currentVal = new BigFraction(BigInteger.valueOf(0), BigInteger.valueOf(1));
   } // end BFCalculator()
@@ -76,7 +85,9 @@ public class BFCalculator {
     currentVal = currentVal.divide(val);
   } // end divide()
 
-  /** Resets most recently computed value to zero. */
+  /**
+   * Resets most recently computed value to zero.
+   */
   public void clear() {
     currentVal.setDenom(BigInteger.valueOf(1));
     currentVal.setNum(BigInteger.valueOf(0));
